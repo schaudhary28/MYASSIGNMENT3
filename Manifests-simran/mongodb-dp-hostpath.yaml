@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   name: mongo
   labels:
-    app: mongo
-    Label: assignment3
+    app.kubernetes.io/name: mongo
+    app.kubernetes.io/component: backend
 spec:
   selector:
     matchLabels:
@@ -23,12 +23,16 @@ spec:
         args:
           - --bind_ip
           - 0.0.0.0
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
         ports:
         - containerPort: 27017
         volumeMounts:
-        - name: mongodb-data
+        - name: mongodb-pvc2
           mountPath: /data/db
       volumes:
-      - name: mongodb-data
+      - name: mongodb-pvc2
         persistentVolumeClaim:
-          claimName: mongodb-pvc
+            claimName: mongodb-pvc2
