@@ -6,15 +6,15 @@ metadata:
     app.kubernetes.io/name: guestbook
     app.kubernetes.io/component: frontend
 spec:
+  type: LoadBalancer
   # if your cluster supports it, uncomment the following to automatically create
   # an external load-balanced IP for the frontend service.
-  type: LoadBalancer
+  # type: LoadBalancer
+  #type: LoadBalancer
   ports:
+    # the port that this service should serve on
   - port: 80
     targetPort: 80
-    # Optional field
-    # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
-    LoadBalancer: 30100
   selector:
     app.kubernetes.io/name: guestbook
     app.kubernetes.io/component: frontend
